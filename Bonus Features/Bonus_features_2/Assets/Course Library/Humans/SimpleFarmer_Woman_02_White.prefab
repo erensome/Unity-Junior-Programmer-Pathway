@@ -363,9 +363,10 @@ GameObject:
   - component: {fileID: 9500000}
   - component: {fileID: 7487589814230407457}
   - component: {fileID: 7193665378889463089}
+  - component: {fileID: 645511911}
   m_Layer: 0
   m_Name: SimpleFarmer_Woman_02_White
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -435,11 +436,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a0b36070569334e84f0a5683818a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 15
   xRange: 20
   lowerZRange: -1.8
   upperZRange: 16.65
   projectilePrefab: {fileID: 935471363583799454, guid: 4165e40382fe2ec448e9e0cb2ea0e74f, type: 3}
+--- !u!114 &645511911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b0a12352cd5e054180c397842a6ac33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &106968
 GameObject:
   m_ObjectHideFlags: 0
