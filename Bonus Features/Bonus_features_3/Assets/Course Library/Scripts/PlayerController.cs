@@ -67,14 +67,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        // A glitch occurs when the player died top of the obstacle therefore I added isGameOver state too.
+        // A glitch occurs when the player died top of the obstacle therefore I add isGameOver states.
         if (other.gameObject.CompareTag("Ground") && !isGameOver)
         {
             isOnGround = true;
             doubleJump = true;
             dirtParticle.Play();
         }
-        else if (other.gameObject.CompareTag("Obstacle"))
+        else if (other.gameObject.CompareTag("Obstacle") && !isGameOver)
         {
             isGameOver = true;
             playerAnimator.SetBool("Death_b",true);
