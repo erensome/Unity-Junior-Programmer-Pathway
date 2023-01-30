@@ -12,10 +12,5 @@ public class RotateCamera : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         transform.Rotate(Vector3.up, horizontalInput * Time.deltaTime * rotateSpeed);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            print(transform.rotation.eulerAngles);
-        }
     }
 }

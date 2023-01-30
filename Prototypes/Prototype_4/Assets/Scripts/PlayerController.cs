@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private GameObject focalPoint;
     public GameObject powerUpIndicator;
     [SerializeField]
-    private float speed;
+    private float speed; // 5f
     private float powerUpForce = 15f;
     public bool hasPowerup;
     
@@ -53,6 +53,5 @@ public class PlayerController : MonoBehaviour
        yield return new WaitForSeconds(8.0f);
        hasPowerup = false;
        powerUpIndicator.SetActive(false);
-       print(hasPowerup);
     }
 }

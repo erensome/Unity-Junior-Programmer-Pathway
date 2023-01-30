@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     private GameObject player;
     private Rigidbody enemyRb;
     [SerializeField]
-    private float speed;
+    private float speed; // 3f
     
     // Start is called before the first frame update
     void Start()
