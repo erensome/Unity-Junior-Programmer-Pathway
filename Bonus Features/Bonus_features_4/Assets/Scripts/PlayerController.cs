@@ -7,16 +7,26 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     private GameObject focalPoint;
     public GameObject powerUpIndicator;
+    public GameObject rocketPrefab;
+    public TextManager TM;
+    
+    
+    public int rocketCount = 3;
+    
     [SerializeField]
     private float speed; // 5f
-    private float powerUpForce = 15f;
-    public bool hasPowerup;
+    private float powerUpForce = 100f;
+    private float smashingRadius = 15f;
+    public PowerupType currentPowerUpType = PowerupType.None;
+
+    private Coroutine powerUpCoroutine;
     
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
+        print(powerUpForce);
     }
 
     // Update is called once per frame
@@ -25,22 +35,70 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * verticalInput * speed);
         powerUpIndicator.transform.position = transform.position;
+
+        if (Input.GetKeyDown(KeyCode.F) && currentPowerUpType == PowerupType.Rocket && rocketCount > 0)
+        {
+            // Ateşleme
+            LaunchRocket();
+            if (--rocketCount == 0)
+            {
+                StopCoroutine(powerUpCoroutine);
+                ResetPowerup();
+                TM.RocketCount.gameObject.SetActive(false);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && currentPowerUpType == PowerupType.Smash)
+        {
+            StartCoroutine(SmashingRoutine());
+        }
     }
 
+    private void Smashing()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        Rigidbody enemyRigidbody;
+        foreach (var enemy in enemies)
+        {
+            enemyRigidbody = enemy.gameObject.GetComponent<Rigidbody>();
+            Vector3 awayFromPlayer = (enemy.transform.position - transform.position).normalized;
+            if (awayFromPlayer.magnitude <= smashingRadius)
+            {
+                float distance = Vector3.Distance(enemy.transform.position, transform.position);
+                enemyRigidbody.AddForce(awayFromPlayer.normalized * powerUpForce / distance , ForceMode.Impulse);
+            }
+        }
+    }
+    
+    private void LaunchRocket()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            var rocketInstance = Instantiate(rocketPrefab, transform.position + Vector3.up, rocketPrefab.transform.rotation);
+            rocketInstance.GetComponent<RocketLaunch>().Fire(enemies[i].transform);
+        }
+    }
+    
     private void OnTriggerEnter(Collider other) 
     {
         if(other.gameObject.CompareTag("Powerup"))
         {
-            hasPowerup = true;
             Destroy(other.gameObject);
-            StartCoroutine(powerUpCountdown());
             powerUpIndicator.SetActive(true);
+            currentPowerUpType = other.gameObject.GetComponent<PowerUp>().powerUpType;
+            if (currentPowerUpType == PowerupType.Rocket)
+            {
+                TM.RocketCount.gameObject.SetActive(true);
+                rocketCount = 3;
+            }
+            powerUpCoroutine = StartCoroutine(PowerupCountdown());
         }
     }
 
     private void OnCollisionEnter(Collision other) 
     {
-        if(other.gameObject.CompareTag("Enemy") && hasPowerup)
+        if(other.gameObject.CompareTag("Enemy") && currentPowerUpType == PowerupType.Pushback)
         {
             Rigidbody enemyRb = other.gameObject.GetComponent<Rigidbody>();
             Vector3 forceDirection = other.transform.position - transform.position;
@@ -48,10 +106,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator powerUpCountdown()
+    // Sets power up type to none and disable power up indicator
+    private void ResetPowerup()
     {
-       yield return new WaitForSeconds(8.0f);
-       hasPowerup = false;
-       powerUpIndicator.SetActive(false);
+        currentPowerUpType = PowerupType.None;
+        powerUpIndicator.SetActive(false);
+    }
+    
+    IEnumerator SmashingRoutine()
+    {
+        playerRb.AddForce(Vector3.up * 30f, ForceMode.Impulse);
+        yield return new WaitForSeconds(0.25f);
+        playerRb.AddForce(Vector3.down * 60f, ForceMode.Impulse);
+
+        yield return new WaitUntil(() => transform.position.y <= 0.25f);
+        playerRb.velocity = Vector3.zero;
+        playerRb.angularVelocity = Vector3.zero;
+        Smashing();
+    }
+    
+    IEnumerator PowerupCountdown()
+    {
+       yield return new WaitForSeconds(7.0f);
+       ResetPowerup();
     }
 }

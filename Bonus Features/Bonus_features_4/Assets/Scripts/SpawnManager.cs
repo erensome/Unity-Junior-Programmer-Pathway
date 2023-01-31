@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-    public GameObject powerupPrefab;
+    public GameObject[] enemyPrefab;
+    public GameObject[] powerupPrefab;
     private float spawnRange = 9f;
     private int enemyCount;
     private int waveSize = 1;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -30,17 +31,33 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnPowerUp()
     {
-        Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+        int index = Random.Range(0, powerupPrefab.Length);
+        GameObject newPowerup = Instantiate(powerupPrefab[index], GenerateSpawnPosition(),
+            powerupPrefab[index].transform.rotation);
     }
 
     void SpawnEnemyWave(int waveCount)
     {
+        int index = 0;
         for (int i = 0; i < waveCount; i++)
         {
-            Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+            if (waveCount == 5 && i == 0)
+            {
+                index = enemyPrefab.Length - 1;
+            }
+            else if (waveCount > 3)
+            {
+                index = Random.Range(0, enemyPrefab.Length - 1);
+            }
+            else if (waveCount >= 2)
+            {
+                index = Random.Range(0, 2);
+            }
+            Instantiate(enemyPrefab[index], GenerateSpawnPosition(), enemyPrefab[index].transform.rotation);
         }
     }
 
+    // Get Random Enemy Index
     Vector3 GenerateSpawnPosition()
     {
         float spawnPosX = Random.Range(-spawnRange, spawnRange);
