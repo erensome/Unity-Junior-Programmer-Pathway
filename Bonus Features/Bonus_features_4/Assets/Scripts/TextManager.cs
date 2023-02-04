@@ -23,6 +23,19 @@ public class TextManager : MonoBehaviour
     void Update()
     {
         powerUpType.text = playerController.currentPowerUpType.ToString();
-        RocketCount.text = playerController.rocketCount.ToString();
+
+        if (playerController.currentPowerUpType == PowerupType.None)
+        {
+            powerUpTimer.enabled = false;
+        }
+        else if (playerController.currentPowerUpType == PowerupType.Rocket)
+        {
+            powerUpTimer.enabled = true;
+            powerUpTimer.text = playerController.rocketCount.ToString();
+        }
+        else
+        {
+            // Show time
+        }
     }
 }

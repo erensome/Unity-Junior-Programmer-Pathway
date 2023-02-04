@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F) && currentPowerUpType == PowerupType.Rocket && rocketCount > 0)
         {
-            // Ateşleme
             LaunchRocket();
             if (--rocketCount == 0)
             {
@@ -120,8 +119,7 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(Vector3.down * 60f, ForceMode.Impulse);
 
         yield return new WaitUntil(() => transform.position.y <= 0.25f);
-        playerRb.velocity = Vector3.zero;
-        playerRb.angularVelocity = Vector3.zero;
+        playerRb.velocity /= 2;
         Smashing();
     }
     
