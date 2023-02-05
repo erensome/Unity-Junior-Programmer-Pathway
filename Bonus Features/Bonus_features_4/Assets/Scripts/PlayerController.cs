@@ -38,6 +38,15 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(focalPoint.transform.forward * verticalInput * speed);
         powerUpIndicator.transform.position = transform.position;
 
+        // Game Over
+        if (transform.position.y < -5f)
+        {
+            var spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+            spawnManager.enabled = false;
+            TM.gameOver.enabled = true;
+            Destroy(gameObject);
+        }
+        
         if (Input.GetKeyDown(KeyCode.F) && currentPowerUpType == PowerupType.Rocket && rocketCount > 0)
         {
             LaunchRocket();
@@ -51,16 +60,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && currentPowerUpType == PowerupType.Smash)
         {
             StartCoroutine(SmashingRoutine());
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (var enemy in enemies)
-            {
-                Destroy(enemy);
-            }
         }
     }
     private void OnTriggerEnter(Collider other) 

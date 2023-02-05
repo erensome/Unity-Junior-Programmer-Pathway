@@ -81,5 +81,6 @@ public class SpawnManager : MonoBehaviour
             int index = Random.Range(0, enemyPrefab.Length);
             Instantiate(enemyPrefab[index], GenerateSpawnPosition(), enemyPrefab[index].transform.rotation);
         }
+        SpawnPowerUp();
     }
 }

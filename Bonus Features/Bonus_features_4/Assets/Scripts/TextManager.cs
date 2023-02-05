@@ -12,6 +12,8 @@ public class TextManager : MonoBehaviour
     public Text rocketCount;
 
     public Text waveCount;
+
+    public Text gameOver;
     
     private PlayerController playerController;
 
