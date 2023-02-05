@@ -9,33 +9,27 @@ public class TextManager : MonoBehaviour
 
     public Text powerUpTimer;
 
-    public Text RocketCount;
+    public Text rocketCount;
+
+    public Text waveCount;
     
     private PlayerController playerController;
+
+    private SpawnManager spawnManager;
+    
     // Start is called before the first frame update
     void Start()
     {
         playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        print(playerController);
+        spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         powerUpType.text = playerController.currentPowerUpType.ToString();
-
-        if (playerController.currentPowerUpType == PowerupType.None)
-        {
-            powerUpTimer.enabled = false;
-        }
-        else if (playerController.currentPowerUpType == PowerupType.Rocket)
-        {
-            powerUpTimer.enabled = true;
-            powerUpTimer.text = playerController.rocketCount.ToString();
-        }
-        else
-        {
-            // Show time
-        }
+        rocketCount.text =  playerController.rocketCount.ToString();
+        powerUpTimer.text = (Mathf.Ceil(playerController.countDown)).ToString();
+        waveCount.text = $"Wave: {spawnManager.waveSize}";
     }
 }

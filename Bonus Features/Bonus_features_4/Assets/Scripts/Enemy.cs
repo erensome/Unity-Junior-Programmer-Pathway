@@ -7,17 +7,22 @@ public class Enemy : MonoBehaviour
 {
     private GameObject player;
     private Rigidbody enemyRb;
+    private SpawnManager spawnManager;
     
     [SerializeField]
     private float speed; // 3f
-
     private float forceFactor = 6f;
+    private float nextSpawn;
+    public float miniSpawnInterval;
+    public bool isBoss = false;
+    
         
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
         enemyRb = GetComponent<Rigidbody>();
+        if (isBoss) spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
     }
 
     // Update is called once per frame
@@ -29,6 +34,15 @@ public class Enemy : MonoBehaviour
         if (transform.position.y < -5f)
         {
             Destroy(gameObject);
+        }
+
+        if (isBoss)
+        {
+            if (Time.time >= nextSpawn)
+            {
+                spawnManager.MiniEnemySpawn(spawnManager.waveSize / spawnManager.bossRound);
+                nextSpawn = Time.time + miniSpawnInterval;
+            }
         }
     }
 

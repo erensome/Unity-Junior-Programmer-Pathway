@@ -10,13 +10,16 @@ public class PlayerController : MonoBehaviour
     public GameObject rocketPrefab;
     public TextManager TM;
     
-    
-    public int rocketCount = 3;
+    [HideInInspector]
+    public int rocketCount;
     
     [SerializeField]
     private float speed; // 5f
-    private float powerUpForce = 100f;
+    private float powerUpForce = 20f;
+    private float smashForce = 100f;
     private float smashingRadius = 15f;
+    public float countDown;
+    
     public PowerupType currentPowerUpType = PowerupType.None;
 
     private Coroutine powerUpCoroutine;
@@ -26,7 +29,6 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
-        print(powerUpForce);
     }
 
     // Update is called once per frame
@@ -43,7 +45,6 @@ public class PlayerController : MonoBehaviour
             {
                 StopCoroutine(powerUpCoroutine);
                 ResetPowerup();
-                TM.RocketCount.gameObject.SetActive(false);
             }
         }
 
@@ -51,44 +52,33 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(SmashingRoutine());
         }
-    }
 
-    private void Smashing()
-    {
-        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        Rigidbody enemyRigidbody;
-        foreach (var enemy in enemies)
+
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            enemyRigidbody = enemy.gameObject.GetComponent<Rigidbody>();
-            Vector3 awayFromPlayer = (enemy.transform.position - transform.position).normalized;
-            if (awayFromPlayer.magnitude <= smashingRadius)
+            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var enemy in enemies)
             {
-                float distance = Vector3.Distance(enemy.transform.position, transform.position);
-                enemyRigidbody.AddForce(awayFromPlayer.normalized * powerUpForce / distance , ForceMode.Impulse);
+                Destroy(enemy);
             }
         }
     }
-    
-    private void LaunchRocket()
-    {
-        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            var rocketInstance = Instantiate(rocketPrefab, transform.position + Vector3.up, rocketPrefab.transform.rotation);
-            rocketInstance.GetComponent<RocketLaunch>().Fire(enemies[i].transform);
-        }
-    }
-    
     private void OnTriggerEnter(Collider other) 
     {
         if(other.gameObject.CompareTag("Powerup"))
         {
             Destroy(other.gameObject);
+            if (currentPowerUpType != PowerupType.None)
+            {
+                ResetPowerup();
+                StopCoroutine(powerUpCoroutine);
+            }
             powerUpIndicator.SetActive(true);
             currentPowerUpType = other.gameObject.GetComponent<PowerUp>().powerUpType;
+            TM.powerUpTimer.enabled = true;
             if (currentPowerUpType == PowerupType.Rocket)
             {
-                TM.RocketCount.gameObject.SetActive(true);
+                TM.rocketCount.enabled = true;
                 rocketCount = 3;
             }
             powerUpCoroutine = StartCoroutine(PowerupCountdown());
@@ -105,11 +95,39 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Smashing()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        Rigidbody enemyRigidbody;
+        foreach (var enemy in enemies)
+        {
+            enemyRigidbody = enemy.gameObject.GetComponent<Rigidbody>();
+            Vector3 awayFromPlayer = (enemy.transform.position - transform.position).normalized;
+            if (awayFromPlayer.magnitude <= smashingRadius)
+            {
+                float distance = Vector3.Distance(enemy.transform.position, transform.position);
+                enemyRigidbody.AddForce(awayFromPlayer.normalized * smashForce / distance , ForceMode.Impulse);
+            }
+        }
+    }
+    
+    private void LaunchRocket()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            var rocketInstance = Instantiate(rocketPrefab, transform.position + Vector3.up, rocketPrefab.transform.rotation);
+            rocketInstance.GetComponent<RocketLaunch>().Fire(enemies[i].transform);
+        }
+    }
+
     // Sets power up type to none and disable power up indicator
     private void ResetPowerup()
     {
         currentPowerUpType = PowerupType.None;
         powerUpIndicator.SetActive(false);
+        TM.powerUpTimer.enabled = false;
+        TM.rocketCount.enabled = false;
     }
     
     IEnumerator SmashingRoutine()
@@ -125,7 +143,12 @@ public class PlayerController : MonoBehaviour
     
     IEnumerator PowerupCountdown()
     {
-       yield return new WaitForSeconds(7.0f);
-       ResetPowerup();
+        countDown = 7f;
+        while (countDown >= 0)
+        {
+            countDown -= Time.deltaTime;
+            yield return null;
+        }
+        ResetPowerup();
     }
 }
