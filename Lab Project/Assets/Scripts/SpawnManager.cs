@@ -9,7 +9,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject powerupPrefab;
 
     private float zEnemySpawn = 17;
-    private float xEnemySpawn = 14;
+    private float xEnemySpawn = 12;
 
     private float zPowerSpawn = 8;
     private float xPowerSpawn = 10;
@@ -27,7 +27,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnEnemy()
     {
         int randomIndex = Random.Range(0, enemyPrefabs.Length);
-        Vector3 enemySpawnPos = new Vector3(Random.Range(-xEnemySpawn, xEnemySpawn), 0.6f, zEnemySpawn);
+        Vector3 enemySpawnPos = new Vector3(Random.Range(-xEnemySpawn, xEnemySpawn), 0.3f, zEnemySpawn);
         Instantiate(enemyPrefabs[randomIndex], enemySpawnPos, enemyPrefabs[randomIndex].transform.rotation);
     }
 
