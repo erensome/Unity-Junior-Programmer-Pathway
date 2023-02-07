@@ -41,6 +41,7 @@ public class Target : MonoBehaviour
     {
         Destroy(gameObject);
 
+        // if good objects enter into the sensor then stop the game
         if(!gameObject.CompareTag("Bad"))
         {
             _gameManager.GameOver();
