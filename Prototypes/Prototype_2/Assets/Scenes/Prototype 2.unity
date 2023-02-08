@@ -288,12 +288,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 219465197}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35a0b36070569334e84f0a5683818a7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 38e917c52987daa41af6a0305d9813c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  xRange: 20
-  projectilePrefab: {fileID: 935471363583799454, guid: 4165e40382fe2ec448e9e0cb2ea0e74f, type: 3}
+  projectilePrefab: {fileID: 0}
 --- !u!1 &425805626
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2072993831}
   - component: {fileID: 2072993830}
+  - component: {fileID: 2072993832}
   m_Layer: 0
   m_Name: Spawn Manager
   m_TagString: Untagged
@@ -711,6 +710,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2072993832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072993829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c0e1f24e2ce4a5b9bf1f3a7499cd45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 935471363583799454, guid: 4165e40382fe2ec448e9e0cb2ea0e74f, type: 3}
+  amountToPool: 20
 --- !u!1001 &910563368126648494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -880,5 +894,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3450722914607727967, guid: 702f12d5a79a925408827dc809187a8a, type: 3}
+    - {fileID: 1595516638442412948, guid: 702f12d5a79a925408827dc809187a8a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 702f12d5a79a925408827dc809187a8a, type: 3}

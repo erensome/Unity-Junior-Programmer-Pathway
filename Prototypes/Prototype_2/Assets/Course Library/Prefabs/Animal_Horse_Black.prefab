@@ -1339,9 +1339,9 @@ GameObject:
   - component: {fileID: 910563367764769124}
   - component: {fileID: 910563367772358208}
   - component: {fileID: 910563369145361210}
-  - component: {fileID: 8981898667047564417}
   - component: {fileID: 5640448700611186623}
-  - component: {fileID: 5501737900769459148}
+  - component: {fileID: 8672688638988387791}
+  - component: {fileID: 1144054996382985382}
   m_Layer: 0
   m_Name: Animal_Horse_Black
   m_TagString: Untagged
@@ -1403,18 +1403,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
---- !u!114 &8981898667047564417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910563367765044308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5e01f3b93817243b504221e3bc5643, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &5640448700611186623
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1428,7 +1416,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.252995, y: 37.010494, z: 43.762497}
   m_Center: {x: 0, y: 18.005253, z: 4.1261935}
---- !u!114 &5501737900769459148
+--- !u!114 &8672688638988387791
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1437,7 +1425,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 910563367765044308}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 225c4c1bc1c9ea5429f4a42ad59eeced, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c52ee72091692143869a36cdefe1fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1144054996382985382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910563367765044308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e62e9a8a22fac478a927ce940e28f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &910563367765044642
