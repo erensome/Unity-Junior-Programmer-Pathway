@@ -221,8 +221,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basketball: {fileID: 1576438002626977073, guid: 3c643b16aa29fb24d96b268eb5957c78, type: 3}
-  counter: 0
   panelBehaviour: {fileID: 1463359511}
+  counter: 0
   restartButton: {fileID: 2055395310}
   counterText: {fileID: 598753586}
   timerText: {fileID: 1936600192}
@@ -816,8 +816,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 120, y: 30}
+  m_AnchoredPosition: {x: 0, y: -1.9}
+  m_SizeDelta: {x: 120, y: 28.4171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2055395310
 MonoBehaviour:
