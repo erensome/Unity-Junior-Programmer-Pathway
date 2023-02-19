@@ -15,7 +15,7 @@ public class MenuUIHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        highScore.text = $"High Score: {DataManager.Instance.GetHighScore()}";
+        highScore.text = $"High Score: {DataManager.Instance.GetHighScore()}, {DataManager.Instance.GetHighScoreName()}";
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class MenuUIHandler : MonoBehaviour
     {
         if (userNameTxtBox.text != "")
         {
-            DataManager.Instance.userName = userNameTxtBox.text;
+            DataManager.Instance.currentUserName = userNameTxtBox.text;
             SceneManager.LoadScene(1);
         }
         else

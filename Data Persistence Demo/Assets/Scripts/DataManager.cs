@@ -10,8 +10,10 @@ using UnityEngine.SceneManagement;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
-    public string userName;
+    public string currentUserName;
     private int HighScore;
+    private string HighScoreName;
+    
     private void Awake()
     {
         if (Instance != null)
@@ -28,6 +30,7 @@ public class DataManager : MonoBehaviour
     [Serializable]
     public class SaveData
     {
+        public string userName;
         public int highScore;
     }
 
@@ -40,6 +43,7 @@ public class DataManager : MonoBehaviour
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             HighScore = data.highScore;
+            HighScoreName = data.userName;
         }
     }
 
@@ -48,13 +52,20 @@ public class DataManager : MonoBehaviour
         return HighScore;
     }
 
-    public void SaveHighScore(int m_Points)
+    public string GetHighScoreName()
+    {
+        return HighScoreName;
+    }
+    
+    public void SaveHighScore(string m_Username, int m_Points)
     {
         if (m_Points > HighScore)
         {
             SaveData data = new SaveData();
             data.highScore = m_Points;
+            data.userName = m_Username;
             HighScore = m_Points;
+            HighScoreName = m_Username;
             string json = JsonUtility.ToJson(data);
             File.WriteAllText(Application.persistentDataPath + "/savefile.json",json);
         }
