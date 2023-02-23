@@ -4,7 +4,7 @@
 
 |Challenge Name | Description |Link
 |---------------|-------------|---|
-|Challenge-1    | Plane driving simulation | [Go](https://github.com/erensome/Unity-Junior-Programmer-Pathway/tree/main/Challenges/Challenge_1)|
+|Challenge-1    | Plane flying simulation | [Go](https://github.com/erensome/Unity-Junior-Programmer-Pathway/tree/main/Challenges/Challenge_1)|
 |Challenge-2    | Play Fetch Game | [Go](https://github.com/erensome/Unity-Junior-Programmer-Pathway/tree/main/Challenges/Challenge_2)|
 |Challenge-3    | Endless side-scrolling balloon floating game | [Go](https://github.com/erensome/Unity-Junior-Programmer-Pathway/tree/main/Challenges/Challenge_3)|
 |Challenge-4    | Soccer Game | [Go](https://github.com/erensome/Unity-Junior-Programmer-Pathway/tree/main/Challenges/Challenge_4)|

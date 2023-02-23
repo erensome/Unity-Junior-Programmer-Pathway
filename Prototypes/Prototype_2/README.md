@@ -15,4 +15,3 @@
 
 ## Additional Branch
 * In [Object-Pooling-Prototype-2](https://github.com/erensome/Unity-Junior-Programmer-Pathway/tree/Prototype-2-Object-Pooling) branch I used Object Pooling technique for instantiating foods to optimize my project and make it more performant.  
-  

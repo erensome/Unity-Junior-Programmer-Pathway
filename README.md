@@ -17,4 +17,6 @@ Here is a link if you are interested further details: [Unity Junior Programmer P
 6. [Resource Management Simulation](https://github.com/erensome/Unity-Junior-Programmer-Pathway/tree/main/Resource%20Management%20Simulation)
 7. [Error Debug Project](https://github.com/erensome/Unity-Junior-Programmer-Pathway/tree/main/Error%20Debug%20Project)
 
-* If you encounter any issues or have inquiries regarding the repository, such as code complexity or licensing, please feel free to contact me via email without hesitation: <contact@erensome.com>
+* If you encounter any issues or have inquiries regarding the repository, such as code complexity or licensing, please feel free to contact me via [E-mail][mail] without hesitation: 
+
+[mail]: mailto:contact@erensome.com
