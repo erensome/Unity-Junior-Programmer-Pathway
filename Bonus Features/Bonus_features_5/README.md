@@ -36,3 +36,4 @@
 # Gameplay
 
 - Use **Mouse Left Click** swipe the cursor and destroy the objects.
+- Use **Esc** Key to toggle between pause and continue the game.
