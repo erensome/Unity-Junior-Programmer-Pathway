@@ -45,3 +45,9 @@
 - Use **A-D** Keys to rotate the camera.
 - Use **F** Key to use Rocket ability.
 - Use **Space** Key to use Smash ability.
+
+# Unity Play Link
+
+* Play in fullscreen mode for better experience.
+
+https://play.unity.com/mg/other/webgl-builds-317967

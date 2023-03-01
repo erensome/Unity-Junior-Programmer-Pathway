@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private GameObject player;
     private Rigidbody enemyRb;
     private SpawnManager spawnManager;
+    private GameManager gameManager;
     
     [SerializeField]
     private float speed; // 3f
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.Find("Player");
         enemyRb = GetComponent<Rigidbody>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         if (isBoss) spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
     }
 
@@ -32,9 +34,12 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        Vector3 lookDirection = (player.transform.position - transform.position).normalized;
-        enemyRb.AddForce(lookDirection * speed);
+
+        if (!gameManager.isGameOver)
+        {
+            Vector3 lookDirection = (player.transform.position - transform.position).normalized;
+            enemyRb.AddForce(lookDirection * speed);
+        }
 
         if (isBoss)
         {

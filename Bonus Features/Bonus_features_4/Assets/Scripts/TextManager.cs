@@ -13,7 +13,7 @@ public class TextManager : MonoBehaviour
 
     public Text waveCount;
 
-    public Text gameOver;
+    public GameObject gameOverObjects;
     
     private PlayerController playerController;
 

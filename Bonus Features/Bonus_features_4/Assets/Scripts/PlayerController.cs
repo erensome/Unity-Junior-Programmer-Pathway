@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject powerUpIndicator;
     public GameObject rocketPrefab;
     public TextManager TM;
-    
+    public GameManager GM;
     [HideInInspector]
     public int rocketCount;
     
@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public PowerupType currentPowerUpType = PowerupType.None;
 
     private Coroutine powerUpCoroutine;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -41,10 +42,7 @@ public class PlayerController : MonoBehaviour
         // Game Over
         if (transform.position.y < -5f)
         {
-            var spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
-            spawnManager.enabled = false;
-            TM.gameOver.enabled = true;
-            Destroy(gameObject);
+            GM.GameOver();
         }
         
         if (Input.GetKeyDown(KeyCode.F) && currentPowerUpType == PowerupType.Rocket && rocketCount > 0)
