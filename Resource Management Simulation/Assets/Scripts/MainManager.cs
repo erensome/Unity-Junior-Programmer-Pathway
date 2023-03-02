@@ -46,7 +46,7 @@ public class MainManager : MonoBehaviour
         {
             // If the file does exist, then the method will read its content with File.ReadAllText: 
             string json = File.ReadAllText(path);
-            SaveData myData = myData = JsonUtility.FromJson<SaveData>(json);
+            SaveData myData  = JsonUtility.FromJson<SaveData>(json);
             TeamColor = myData.TeamColor;
         }
     }
